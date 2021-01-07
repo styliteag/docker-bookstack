@@ -12,8 +12,7 @@ services:
       - ./data/mysql:/var/lib/mysql
 
   bookstack:
-    #image: styliteag/bookstack:latest
-    image: ghcr.io/styliteag/bookstack
+    image: styliteag/bookstack:latest
     networks:
       - default
       - ext
