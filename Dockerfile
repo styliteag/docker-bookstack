@@ -1,5 +1,6 @@
 FROM alpine:3 as bookstack
-ENV BOOKSTACK_VERSION=0.30.4
+
+ENV BOOKSTACK_VERSION=0.31.1
 RUN apk add --no-cache curl tar
 RUN set -x; \
     curl -SL -o bookstack.tar.gz https://github.com/BookStackApp/BookStack/archive/v${BOOKSTACK_VERSION}.tar.gz  \
@@ -80,12 +81,15 @@ ENTRYPOINT ["/bin/docker-entrypoint.sh"]
 
 ARG BUILD_DATE
 ARG VCS_REF
-LABEL org.label-schema.build-date=$BUILD_DATE \
+LABEL build_version="stylite.de version:- ${VERSION} Build-date:- ${BUILD_DATE}" \
+      maintainer="wbonis" \
+      org.opencontainers.image.source="https://github.com/styliteag/docker-bookstack" \
+      org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.docker.dockerfile="/Dockerfile" \
       org.label-schema.license="MIT" \
       org.label-schema.name="bookstack" \
-      org.label-schema.vendor="solidnerd" \
-      org.label-schema.url="https://github.com/solidnerd/docker-bookstack/" \
+      org.label-schema.vendor="styliteag" \
+      org.label-schema.url="https://github.com/styliteag/docker-bookstack/" \
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/solidnerd/docker-bookstack.git" \
+      org.label-schema.vcs-url="https://github.com/styliteag/docker-bookstack.git" \
       org.label-schema.vcs-type="Git"

@@ -1,8 +1,8 @@
 ## Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
 
-[![Build Status](https://travis-ci.org/solidnerd/docker-bookstack.svg?branch=master)](https://travis-ci.org/solidnerd/docker-bookstack) [![](https://images.microbadger.com/badges/image/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own commit badge on microbadger.com") [![](https://images.microbadger.com/badges/version/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/license/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own license badge on microbadger.com")
+[![Build Status](https://travis-ci.org/styliteag/docker-bookstack.svg?branch=master)](https://travis-ci.org/styliteag/docker-bookstack) [![](https://images.microbadger.com/badges/image/styliteag/bookstack.svg)](https://microbadger.com/images/styliteag/bookstack "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/styliteag/bookstack.svg)](https://microbadger.com/images/styliteag/bookstack "Get your own commit badge on microbadger.com") [![](https://images.microbadger.com/badges/version/styliteag/bookstack.svg)](https://microbadger.com/images/styliteag/bookstack "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/license/styliteag/bookstack.svg)](https://microbadger.com/images/styliteag/bookstack "Get your own license badge on microbadger.com")
 
-## Current Version: [0.30.4](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
+## Current Version: [0.31.1](https://github.com/styliteag/docker-bookstack/blob/master/Dockerfile)
 
 ### Changes
 
@@ -21,7 +21,7 @@ and after that open your Browser and go to [http://localhost:8080](http://localh
 
 ### Issues
 
-If you have any issues feel free to create an [issue on GitHub](https://github.com/solidnerd/docker-bookstack/issues).
+If you have any issues feel free to create an [issue on GitHub](https://github.com/styliteag/docker-bookstack/issues).
 
 
 ### How to use the Image without Docker compose
@@ -49,8 +49,8 @@ mysql:5.7.21
 ```bash
 docker run -d --link bookstack_db_:mysql \
 -p 8080:8080 \
---name bookstack_0.30.4 \
-solidnerd/bookstack:0.30.4
+--name bookstack_0.31.1 \
+styliteag/bookstack:0.31.1
 ```
 
 #### Docker 1.9+
@@ -82,8 +82,8 @@ docker run -d --net bookstack_nw \
 -e DB_USERNAME=bookstack \
 -e DB_PASSWORD=secret \
 -p 8080:8080 \
---name="bookstack_0.30.4" \
- solidnerd/bookstack:0.30.4
+--name="bookstack_0.31.1" \
+ styliteag/bookstack:0.31.1
 ```
 
 #### Volumes
