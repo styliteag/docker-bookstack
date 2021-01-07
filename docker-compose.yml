@@ -11,7 +11,8 @@ services:
     - ./data/mysql:/var/lib/mysql
 
   bookstack:
-    image: styliteag/bookstack:lastest
+    #image: styliteag/bookstack:lastest
+    image: ghcr.io/styliteag/bookstack
     depends_on:
     - db
     environment:

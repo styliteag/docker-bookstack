@@ -1,0 +1,61 @@
+version: '3.5'
+
+services:
+  db:
+    image: mariadb:10.5
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=bookstack
+      - MYSQL_USER=bookstack
+      - MYSQL_PASSWORD=secret
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+
+  bookstack:
+    #image: styliteag/bookstack:latest
+    image: ghcr.io/styliteag/bookstack
+    networks:
+      - default
+      - ext
+    environment:
+      - DB_HOST=db:3306
+      - DB_DATABASE=bookstack
+      - DB_USERNAME=bookstack
+      - DB_PASSWORD=secret
+    volumes:
+      - ./data/uploads:/var/www/bookstack/public/uploads
+      - ./data/storage-uploads:/var/www/bookstack/storage/uploads
+    deploy:
+      labels:
+        - com.ouroboros.enable=true
+        - traefik.enable=true
+        # Define my port
+        - traefik.http.services.stylite_bookstack.loadbalancer.server.port=8080
+        # For http Requests
+        - traefik.http.routers.stylite_bookstack-http.rule=Host(`bookstack.stylite.de`)
+        - traefik.http.routers.stylite_bookstack-http.entrypoints=web
+        - traefik.http.routers.stylite_bookstack-http.middlewares=stylite_bookstack-https_redirect
+        # Redirect
+        - traefik.http.middlewares.stylite_bookstack-https_redirect.redirectscheme.scheme=https
+        - traefik.http.middlewares.stylite_bookstack-https_redirect.redirectscheme.permanent=true
+        # Request the Cert via acme http
+        - traefik.http.routers.stylite_bookstack.tls.certresolver=acme_http
+        # For https Requests
+        - traefik.http.routers.stylite_bookstack.entrypoints=websecure
+        - traefik.http.routers.stylite_bookstack.rule=Host(`bookstack.stylite.de`)
+        - traefik.http.routers.stylite_bookstack.tls=true
+
+networks:
+  default:
+    driver: overlay
+  ext:
+    external: true
+    name: traefik_public
+
+# secrets:
+#  mysql_root_password:
+#    file: ./mysql_root_password.secret
+#  mysql_password:
+#    file: ./mysql_password.secret
+#  nextcloud_admin_password:
+#    file: ./nextcloud_admin_password.secret
